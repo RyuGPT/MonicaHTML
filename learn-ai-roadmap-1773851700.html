@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 全方位指令架構師</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #4F46E5;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #4F46E5;
+        }
+        #advanced-section {
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen py-8 px-4 font-sans">
+    <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
+        
+        <!-- Header -->
+        <div class="bg-indigo-900 p-8 text-white">
+            <div class="flex justify-between items-start">
+                <div>
+                    <h1 class="text-3xl font-bold tracking-tight">AI 全方位指令架構師</h1>
+                    <p class="text-indigo-200 mt-2">優化目標：<span class="font-semibold text-white border-b border-indigo-400 pb-1">如果想學 AI 應該由邊度入手</span></p>
+                </div>
+                <!-- Mode Toggle -->
+                <div class="flex items-center bg-indigo-800 rounded-lg p-1">
+                    <button type="button" onclick="setMode('simple')" id="btn-simple" class="px-4 py-2 rounded-md text-sm font-medium transition-all bg-white text-indigo-900 shadow-sm">快速評估</button>
+                    <button type="button" onclick="setMode('detailed')" id="btn-detailed" class="px-4 py-2 rounded-md text-sm font-medium transition-all text-indigo-200 hover:text-white">深度分析 (20+ 參數)</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-8">
+            <form id="prompt-form" class="space-y-8">
+                
+                <!-- SECTION 1: ESSENTIAL (Always Visible) -->
+                <div>
+                    <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3">1</span>
+                        核心參數 (必填)
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">目前背景與程度</label>
+                            <select name="Current_Background" class="w-full rounded-lg border-gray-300 border p-2.5 text-sm focus:ring-indigo-500 focus:border-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="完全零基礎（非本科系）">完全零基礎（非本科系）</option>
+                                <option value="懂一點程式（如 Python 基礎）">懂一點程式（如 Python 基礎）</option>
+                                <option value="理工科背景（有數學/邏輯基礎）">理工科背景（有數學/邏輯基礎）</option>
+                                <option value="軟體工程師想轉型 AI">軟體工程師想轉型 AI</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">學習目標與動機</label>
+                            <select name="Learning_Goal" class="w-full rounded-lg border-gray-300 border p-2.5 text-sm focus:ring-indigo-500 focus:border-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="轉職成為 AI 工程師/資料科學家">轉職成為 AI 工程師/資料科學家</option>
+                                <option value="應用 AI 工具提升目前工作效率">應用 AI 工具提升目前工作效率</option>
+                                <option value="開發自己的 AI 產品/創業">開發自己的 AI 產品/創業</option>
+                                <option value="純粹興趣/了解趨勢">純粹興趣/了解趨勢</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">目標 AI 領域</label>
+                            <select name="Target_AI_Domain" class="w-full rounded-lg border-gray-300 border p-2.5 text-sm focus:ring-indigo-500 focus:border-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="生成式 AI (ChatGPT, Midjourney 應用與串接)">生成式 AI (ChatGPT, Midjourney 應用與串接)</option>
+                                <option value="機器學習 (預測模型、數據分析)">機器學習 (預測模型、數據分析)</option>
+                                <option value="深度學習 (神經網路、底層原理)">深度學習 (神經網路、底層原理)</option>
+                                <option value="自然語言處理 (NLP) 或 電腦視覺 (CV)">自然語言處理 (NLP) 或 電腦視覺 (CV)</option>
+                                <option value="還不確定，需要全面概覽">還不確定，需要全面概覽</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">每週可投入時間</label>
+                            <select name="Time_Commitment" class="w-full rounded-lg border-gray-300 border p-2.5 text-sm focus:ring-indigo-500 focus:border-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="每週 1-3 小時 (輕鬆學習)">每週 1-3 小時 (輕鬆學習)</option>
+                                <option value="每週 4-10 小時 (兼職進修)">每週 4-10 小時 (兼職進修)</option>
+                                <option value="每週 10-20 小時 (密集學習)">每週 10-20 小時 (密集學習)</option>
+                                <option value="全職學習 (每週 30 小時以上)">全職學習 (每週 30 小時以上)</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">程式與數學基礎</label>
+                            <select name="Programming_Math_Foundation" class="w-full rounded-lg border-gray-300 border p-2.5 text-sm focus:ring-indigo-500 focus:border-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="不想碰程式，只想學 No-code 工具">不想碰程式，只想學 No-code 工具</option>
+                                <option value="願意學 Python，但數學很弱">願意學 Python，但數學很弱</option>
+                                <option value="程式與數學(微積分/線性代數)都有基礎">程式與數學(微積分/線性代數)都有基礎</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 2: DEEP DIVE (Hidden by default) -->
+                <div id="advanced-section" class="hidden">
+                    <div class="relative py-4">
+                        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                            <div class="w-full border-t border-gray-300"></div>
+                        </div>
+                        <div class="relative flex justify-center">
+                            <span class="bg-white px-3 text-sm font-medium text-gray-500">進階詳細設定</span>
+                        </div>
+                    </div>
+
+                    <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="bg-purple-100 text-purple-700 w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3">2</span>
+                        深度微調參數 (選填)
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 bg-gray-50 rounded-xl border border-gray-200">
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">學習預算</label>
+                            <select name="Budget" class="w-full rounded-lg border-gray-300 border p-2.5 text-sm focus:ring-indigo-500 focus:border-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="完全免費資源 (YouTube, 開源課程)">完全免費資源 (YouTube, 開源課程)</option>
+                                <option value="小額付費 (線上課程平台如 Udemy, Coursera)">小額付費 (線上課程平台如 Udemy, Coursera)</option>
+                                <option value="預算充足 (可參加 Bootcamp 或學位課程)">預算充足 (可參加 Bootcamp 或學位課程)</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">偏好的學習方式</label>
+                            <select name="Learning_Style" class="w-full rounded-lg border-gray-300 border p-2.5 text-sm focus:ring-indigo-500 focus:border-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="影片教學為主">影片教學為主</option>
+                                <option value="文字閱讀與官方文件為主">文字閱讀與官方文件為主</option>
+                                <option value="動手實作專案 (Project-based)">動手實作專案 (Project-based)</option>
+                                <option value="理論推導與底層架構">理論推導與底層架構</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">期望的產出格式</label>
+                            <select name="Output_Format" class="w-full rounded-lg border-gray-300 border p-2.5 text-sm focus:ring-indigo-500 focus:border-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="階段性學習藍圖 (Roadmap)">階段性學習藍圖 (Roadmap)</option>
+                                <option value="具體的課程/書單推薦列表">具體的課程/書單推薦列表</option>
+                                <option value="第一週的詳細行動指南">第一週的詳細行動指南</option>
+                                <option value="常見迷思與避坑指南">常見迷思與避坑指南</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">指導語氣</label>
+                            <select name="Tone" class="w-full rounded-lg border-gray-300 border p-2.5 text-sm focus:ring-indigo-500 focus:border-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="鼓勵且具啟發性 (適合新手)">鼓勵且具啟發性 (適合新手)</option>
+                                <option value="嚴格且結構化 (像大學教授)">嚴格且結構化 (像大學教授)</option>
+                                <option value="務實且結果導向 (像業界前輩)">務實且結果導向 (像業界前輩)</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">實作專案類型</label>
+                            <select name="Project_Focus" class="w-full rounded-lg border-gray-300 border p-2.5 text-sm focus:ring-indigo-500 focus:border-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="聊天機器人/自動化工具">聊天機器人/自動化工具</option>
+                                <option value="數據分析與預測模型">數據分析與預測模型</option>
+                                <option value="影像辨識/生成">影像辨識/生成</option>
+                                <option value="無特定，想先學基礎">無特定，想先學基礎</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">學習資源語言</label>
+                            <select name="Resource_Language" class="w-full rounded-lg border-gray-300 border p-2.5 text-sm focus:ring-indigo-500 focus:border-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="全中文資源">全中文資源</option>
+                                <option value="可接受英文資源 (配字幕)">可接受英文資源 (配字幕)</option>
+                                <option value="全英文原文資源 (最新技術)">全英文原文資源 (最新技術)</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">硬體設備狀況</label>
+                            <select name="Hardware" class="w-full rounded-lg border-gray-300 border p-2.5 text-sm focus:ring-indigo-500 focus:border-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="只有普通文書筆電">只有普通文書筆電</option>
+                                <option value="有高階顯卡 (GPU) 的電腦">有高階顯卡 (GPU) 的電腦</option>
+                                <option value="願意租用雲端運算資源 (如 AWS, Colab Pro)">願意租用雲端運算資源 (如 AWS, Colab Pro)</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">預期達成時間</label>
+                            <select name="Expected_Timeline" class="w-full rounded-lg border-gray-300 border p-2.5 text-sm focus:ring-indigo-500 focus:border-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="1 個月內速成">1 個月內速成</option>
+                                <option value="3-6 個月中短期計畫">3-6 個月中短期計畫</option>
+                                <option value="1 年以上長期扎根">1 年以上長期扎根</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">應用產業/場景</label>
+                            <input type="text" name="Application_Area" placeholder="例如：金融、醫療、行銷、藝術..." class="w-full rounded-lg border-gray-300 border p-2.5 text-sm focus:ring-indigo-500 focus:border-indigo-500">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">社群與互動需求</label>
+                            <select name="Community" class="w-full rounded-lg border-gray-300 border p-2.5 text-sm focus:ring-indigo-500 focus:border-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="喜歡獨立自學">喜歡獨立自學</option>
+                                <option value="需要同儕討論群組">需要同儕討論群組</option>
+                                <option value="需要導師 (Mentor) 指導">需要導師 (Mentor) 指導</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2 md:col-span-2">
+                            <label class="block text-sm font-semibold text-gray-700">其他特殊限制或需求</label>
+                            <textarea name="Other_Constraints" rows="2" placeholder="例如：我不想學太深奧的數學，只想要能快速做出東西..." class="w-full rounded-lg border-gray-300 border p-2.5 text-sm focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+            <!-- Action Buttons -->
+            <div class="mt-10 pt-6 border-t border-gray-100 flex flex-col sm:flex-row gap-4">
+                <button type="button" onclick="handleAction('share')" class="flex-1 flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-6 rounded-xl transition shadow-lg transform active:scale-98">
+                    手機分享
+                </button>
+                <button type="button" onclick="handleAction('copy')" class="flex-1 flex items-center justify-center bg-white hover:bg-gray-50 text-gray-700 font-bold py-4 px-6 rounded-xl border-2 border-gray-200 transition transform active:scale-98">
+                    結構化複製
+                </button>
+                <button type="button" onclick="handleAction('narrative')" class="flex-1 flex items-center justify-center bg-teal-600 hover:bg-teal-700 text-white font-bold py-4 px-6 rounded-xl transition shadow-lg transform active:scale-98">
+                    轉為敘述並複製
+                </button>
+            </div>
+
+            <!-- 終極保險：結果顯示框 (預設隱藏，撳掣後顯示) -->
+            <div id="result-box" class="hidden mt-8 p-6 bg-gray-50 rounded-xl border border-gray-200 shadow-inner">
+                <h3 class="text-sm font-bold text-gray-700 mb-3 flex items-center">
+                    <span>✨ 生成結果</span>
+                    <span class="ml-2 text-xs font-normal text-gray-500">(如無法自動複製，請手動全選下方文字)</span>
+                </h3>
+                <textarea id="final-prompt-text" class="w-full h-64 p-4 text-sm font-mono text-gray-800 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" readonly></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mode Switching Logic
+        function setMode(mode) {
+            const advancedSection = document.getElementById('advanced-section');
+            const btnSimple = document.getElementById('btn-simple');
+            const btnDetailed = document.getElementById('btn-detailed');
+
+            if (mode === 'simple') {
+                advancedSection.classList.add('hidden');
+                btnSimple.className = "px-4 py-2 rounded-md text-sm font-medium transition-all bg-white text-indigo-900 shadow-sm";
+                btnDetailed.className = "px-4 py-2 rounded-md text-sm font-medium transition-all text-indigo-200 hover:text-white";
+            } else {
+                advancedSection.classList.remove('hidden');
+                btnSimple.className = "px-4 py-2 rounded-md text-sm font-medium transition-all text-indigo-200 hover:text-white";
+                btnDetailed.className = "px-4 py-2 rounded-md text-sm font-medium transition-all bg-white text-indigo-900 shadow-sm";
+            }
+        }
+
+        function generatePrompt() {
+            const form = document.getElementById('prompt-form');
+            const formData = new FormData(form);
+            let contextParts = [];
+            const baseRequest = "如果想學 AI 應該由邊度入手";
+            
+            for (let [key, value] of formData.entries()) {
+                if(value && value.trim() !== "") {
+                    let readableKey = key.replace(/_/g, ' ');
+                    contextParts.push(`### ${readableKey}\n${value}`);
+                }
+            }
+
+            return `
+# 🚀 Expert Prompt Request
+**Task**: ${baseRequest}
+
+---
+## 📋 Context & Requirements
+The following details define the scope and style of the response:
+
+${contextParts.join('\n\n')}
+
+---
+## 🎯 Output Instruction
+Please act as a world-class expert in this field. Analyze the requirements above and provide a comprehensive, high-quality response that strictly adheres to the constraints and tone specified.
+`.trim();
+        }
+
+        async function handleAction(type) {
+            let promptText = "";
+            const baseRequest = "如果想學 AI 應該由邊度入手";
+            const resultBox = document.getElementById('result-box');
+            const finalPromptText = document.getElementById('final-prompt-text');
+            
+            // 1. 準備要複製/分享嘅文字
+            if (type === 'narrative') {
+                const form = document.getElementById('prompt-form');
+                const formData = new FormData(form);
+                let details = [];
+                
+                for (let [key, value] of formData.entries()) {
+                    if(value && value.trim() !== "") {
+                        let readableKey = key.replace(/_/g, ' ');
+                        details.push(`關於「${readableKey}」請設定為「${value}」`);
+                    }
+                }
+                
+                promptText = baseRequest;
+                if(details.length > 0) {
+                    promptText += `並參考以下條件：\n${details.join('；\n')}。`;
+                }
+            } else {
+                promptText = generatePrompt();
+            }
+
+            // 2. 顯示結果框 (雙重保險)
+            finalPromptText.value = promptText;
+            resultBox.classList.remove('hidden');
+
+            // 3. 執行動作
+            if (type === 'share') {
+                if (navigator.share) {
+                    try { 
+                        await navigator.share({ 
+                            title: 'Super Prompt', 
+                            text: promptText 
+                        }); 
+                    } catch (err) { 
+                        console.log('分享已取消或失敗', err); 
+                    }
+                } else {
+                    alert('你的瀏覽器暫時不支援原生分享，請直接複製下方文字框內容。');
+                }
+            } else {
+                // 嘗試複製
+                try {
+                    // 新版 API
+                    if (navigator.clipboard && window.isSecureContext) {
+                        await navigator.clipboard.writeText(promptText);
+                        alert(type === 'narrative' ? '✅ 敘述型條件已成功複製！' : '✅ 結構化 Prompt 已成功複製！');
+                    } else {
+                        // 舊版 Fallback
+                        finalPromptText.select();
+                        document.execCommand('copy');
+                        alert(type === 'narrative' ? '✅ 敘述型條件已成功複製！' : '✅ 結構化 Prompt 已成功複製！');
+                    }
+                } catch (err) {
+                    alert('⚠️ 自動複製被瀏覽器阻擋，請手動長按下方文字框進行複製。');
+                    console.error('複製失敗:', err);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
