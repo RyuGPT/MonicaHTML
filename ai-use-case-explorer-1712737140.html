@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 全方位指令架構師</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #4F46E5;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #4F46E5;
+        }
+        #advanced-section {
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen py-8 px-4 font-sans">
+    <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
+        
+        <!-- Header -->
+        <div class="bg-indigo-900 p-8 text-white">
+            <div class="flex justify-between items-start">
+                <div>
+                    <h1 class="text-3xl font-bold tracking-tight">AI 全方位指令架構師</h1>
+                    <p class="text-indigo-200 mt-2">優化目標：<span class="font-semibold text-white border-b border-indigo-400 pb-1">探索 AI 應用場景與個人化建議</span></p>
+                </div>
+                <!-- Mode Toggle -->
+                <div class="flex items-center bg-indigo-800 rounded-lg p-1">
+                    <button type="button" onclick="setMode('simple')" id="btn-simple" class="px-4 py-2 rounded-md text-sm font-medium transition-all bg-white text-indigo-900 shadow-sm">快速評估</button>
+                    <button type="button" onclick="setMode('detailed')" id="btn-detailed" class="px-4 py-2 rounded-md text-sm font-medium transition-all text-indigo-200 hover:text-white">深度分析 (20+ 參數)</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-8">
+            <form id="prompt-form" class="space-y-8">
+                
+                <!-- SECTION 1: ESSENTIAL (Always Visible) -->
+                <div>
+                    <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3">1</span>
+                        核心參數 (必填)
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <div class="col-span-1 md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">您目前最大的痛點 / 花最多時間的事情是甚麼？</label>
+                            <textarea name="Current_Pain_Points" rows="2" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" placeholder="例如：每天花很多時間回覆電郵、想不出企劃案、想學英文但無從入手..."></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">您的職業 / 身分</label>
+                            <select name="User_Identity" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="學生">學生</option>
+                                <option value="上班族/白領">上班族 / 白領</option>
+                                <option value="創業者/企業主">創業者 / 企業主</option>
+                                <option value="自由工作者">自由工作者 (Freelancer)</option>
+                                <option value="家庭主婦/夫">家庭主婦 / 夫</option>
+                                <option value="退休人士">退休人士</option>
+                                <option value="其他">其他</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">希望 AI 幫您達成的首要目標</label>
+                            <select name="Primary_Goal" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="提高工作/學習效率 (慳時間)">提高工作/學習效率 (慳時間)</option>
+                                <option value="激發創意與靈感">激發創意與靈感</option>
+                                <option value="學習新技能或知識">學習新技能或知識</option>
+                                <option value="日常娛樂與消遣">日常娛樂與消遣</option>
+                                <option value="解決特定的技術問題">解決特定的技術問題</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">您的科技熟悉度</label>
+                            <select name="Tech_Savviness" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="新手 (平時只用基本App，少接觸新科技)">新手 (平時只用基本App，少接觸新科技)</option>
+                                <option value="中階 (熟悉各種軟件，願意嘗試新工具)">中階 (熟悉各種軟件，願意嘗試新工具)</option>
+                                <option value="高階 (了解科技趨勢，甚至懂一點程式碼)">高階 (了解科技趨勢，甚至懂一點程式碼)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">主要用來操作 AI 的裝置</label>
+                            <select name="Primary_Device" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="智能手機 (隨時隨地用)">智能手機 (隨時隨地用)</option>
+                                <option value="手提電腦 / 桌上電腦 (主力工作用)">手提電腦 / 桌上電腦 (主力工作用)</option>
+                                <option value="平板電腦">平板電腦</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- SECTION 2: DEEP DIVE (Hidden by default) -->
+                <div id="advanced-section" class="hidden">
+                    <div class="relative py-4">
+                        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                            <div class="w-full border-t border-gray-300"></div>
+                        </div>
+                        <div class="relative flex justify-center">
+                            <span class="bg-white px-3 text-sm font-medium text-gray-500">進階詳細設定</span>
+                        </div>
+                    </div>
+
+                    <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="bg-purple-100 text-purple-700 w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3">2</span>
+                        深度微調參數 (選填)
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 bg-gray-50 rounded-xl border border-gray-200">
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">所屬產業 / 專業領域</label>
+                            <input type="text" name="Industry_Field" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" placeholder="例如：行銷、IT、教育、餐飲...">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">偏好的 AI 輸出格式</label>
+                            <select name="Preferred_Output_Format" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="純文字 (文章、報告、電郵)">純文字 (文章、報告、電郵)</option>
+                                <option value="圖片 / 圖像設計">圖片 / 圖像設計</option>
+                                <option value="數據表格 / 試算表公式">數據表格 / 試算表公式</option>
+                                <option value="程式碼">程式碼</option>
+                                <option value="語音 / 影片生成">語音 / 影片生成</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">AI 工具預算考量</label>
+                            <select name="Budget" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="只限完全免費的工具">只限完全免費的工具</option>
+                                <option value="若好用，願意支付每月小額訂閱費">若好用，願意支付每月小額訂閱費</option>
+                                <option value="公司報銷，尋求企業級專業工具">公司報銷，尋求企業級專業工具</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">主要互動語言</label>
+                            <select name="Language_Preference" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="廣東話 (口語)">廣東話 (口語)</option>
+                                <option value="繁體中文 (書面語)">繁體中文 (書面語)</option>
+                                <option value="英文">英文</option>
+                                <option value="雙語混合">雙語混合</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">每日願意投入學習 AI 的時間</label>
+                            <select name="Time_Commitment" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="極少 (希望一鍵完成，不想學複雜操作)">極少 (希望一鍵完成，不想學複雜操作)</option>
+                                <option value="每日 10-20 分鐘">每日 10-20 分鐘</option>
+                                <option value="願意花數小時深入研究">願意花數小時深入研究</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">資料隱私與機密性要求</label>
+                            <select name="Data_Privacy" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="一般日常對話，無機密資料">一般日常對話，無機密資料</option>
+                                <option value="涉及公司內部數據/客戶資料 (需高度保密)">涉及公司內部數據/客戶資料 (需高度保密)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">使用場景 (單人 vs 團隊)</label>
+                            <select name="Team_Collaboration" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="純粹個人使用">純粹個人使用</option>
+                                <option value="需要與團隊共享成果或協作">需要與團隊共享成果或協作</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">期望的互動方式</label>
+                            <select name="Interaction_Style" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="文字聊天 (如 ChatGPT)">文字聊天 (如 ChatGPT)</option>
+                                <option value="語音對話 (當作虛擬助理)">語音對話 (當作虛擬助理)</option>
+                                <option value="系統自動化 (在背景自動執行任務)">系統自動化 (在背景自動執行任務)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">迫切性</label>
+                            <select name="Urgency" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="急需解決眼前的具體問題">急需解決眼前的具體問題</option>
+                                <option value="純粹好奇，為未來做準備">純粹好奇，為未來做準備</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">特殊興趣或愛好</label>
+                            <input type="text" name="Specific_Interests" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" placeholder="例如：投資、寫作、畫畫、打機...">
+                        </div>
+
+                    </div>
+                </div>
+
+            </form>
+
+            <!-- Action Buttons -->
+            <div class="mt-10 pt-6 border-t border-gray-100 flex flex-col sm:flex-row gap-4">
+                <button type="button" onclick="handleAction('share')" class="flex-1 flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-6 rounded-xl transition shadow-lg transform active:scale-98">
+                    手機分享
+                </button>
+                <button type="button" onclick="handleAction('copy')" class="flex-1 flex items-center justify-center bg-white hover:bg-gray-50 text-gray-700 font-bold py-4 px-6 rounded-xl border-2 border-gray-200 transition transform active:scale-98">
+                    結構化複製
+                </button>
+                <button type="button" onclick="handleAction('narrative')" class="flex-1 flex items-center justify-center bg-teal-600 hover:bg-teal-700 text-white font-bold py-4 px-6 rounded-xl transition shadow-lg transform active:scale-98">
+                    轉為敘述並複製
+                </button>
+            </div>
+
+            <!-- 終極保險：結果顯示框 (預設隱藏，撳掣後顯示) -->
+            <div id="result-box" class="hidden mt-8 p-6 bg-gray-50 rounded-xl border border-gray-200 shadow-inner">
+                <h3 class="text-sm font-bold text-gray-700 mb-3 flex items-center">
+                    <span>✨ 生成結果</span>
+                    <span class="ml-2 text-xs font-normal text-gray-500">(如無法自動複製，請手動全選下方文字)</span>
+                </h3>
+                <textarea id="final-prompt-text" class="w-full h-64 p-4 text-sm font-mono text-gray-800 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" readonly></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mode Switching Logic
+        function setMode(mode) {
+            const advancedSection = document.getElementById('advanced-section');
+            const btnSimple = document.getElementById('btn-simple');
+            const btnDetailed = document.getElementById('btn-detailed');
+
+            if (mode === 'simple') {
+                advancedSection.classList.add('hidden');
+                btnSimple.className = "px-4 py-2 rounded-md text-sm font-medium transition-all bg-white text-indigo-900 shadow-sm";
+                btnDetailed.className = "px-4 py-2 rounded-md text-sm font-medium transition-all text-indigo-200 hover:text-white";
+            } else {
+                advancedSection.classList.remove('hidden');
+                btnSimple.className = "px-4 py-2 rounded-md text-sm font-medium transition-all text-indigo-200 hover:text-white";
+                btnDetailed.className = "px-4 py-2 rounded-md text-sm font-medium transition-all bg-white text-indigo-900 shadow-sm";
+            }
+        }
+
+        function generatePrompt() {
+            const form = document.getElementById('prompt-form');
+            const formData = new FormData(form);
+            let contextParts = [];
+            const baseRequest = "探索 AI 應用場景與個人化建議";
+            
+            for (let [key, value] of formData.entries()) {
+                if(value && value.trim() !== "") {
+                    let readableKey = key.replace(/_/g, ' ');
+                    contextParts.push(`### ${readableKey}\n${value}`);
+                }
+            }
+
+            return `
+# 🚀 Expert Prompt Request
+**Task**: ${baseRequest}
+
+---
+## 📋 Context & Requirements
+The following details define the scope and style of the response:
+
+${contextParts.join('\n\n')}
+
+---
+## 🎯 Output Instruction
+Please act as a world-class AI consultant. Analyze my profile and pain points based on the details provided above. 
+1. Suggest 3-5 highly specific, practical ways I can use AI right now to solve my problems or achieve my goals.
+2. Recommend the exact AI tools (e.g., ChatGPT, Claude, Midjourney, specific specialized apps) that fit my budget, tech savviness, and device preferences.
+3. Provide a simple "First Step" action plan for me to get started today.
+Please respond in my preferred language if specified.
+`.trim();
+        }
+
+        async function handleAction(type) {
+            let promptText = "";
+            const baseRequest = "探索 AI 應用場景與個人化建議";
+            const resultBox = document.getElementById('result-box');
+            const finalPromptText = document.getElementById('final-prompt-text');
+            
+            // 1. 準備要複製/分享嘅文字
+            if (type === 'narrative') {
+                const form = document.getElementById('prompt-form');
+                const formData = new FormData(form);
+                let details = [];
+                
+                for (let [key, value] of formData.entries()) {
+                    if(value && value.trim() !== "") {
+                        let readableKey = key.replace(/_/g, ' ');
+                        details.push(`關於「${readableKey}」請設定為「${value}」`);
+                    }
+                }
+                
+                promptText = baseRequest;
+                if(details.length > 0) {
+                    promptText += `並參考以下條件：\n${details.join('；\n')}。`;
+                }
+            } else {
+                promptText = generatePrompt();
+            }
+
+            // 2. 顯示結果框 (雙重保險)
+            finalPromptText.value = promptText;
+            resultBox.classList.remove('hidden');
+
+            // 3. 執行動作
+            if (type === 'share') {
+                if (navigator.share) {
+                    try { 
+                        await navigator.share({ 
+                            title: 'Super Prompt', 
+                            text: promptText 
+                        }); 
+                    } catch (err) { 
+                        console.log('分享已取消或失敗', err); 
+                    }
+                } else {
+                    alert('你的瀏覽器暫時不支援原生分享，請直接複製下方文字框內容。');
+                }
+            } else {
+                // 嘗試複製
+                try {
+                    // 新版 API
+                    if (navigator.clipboard && window.isSecureContext) {
+                        await navigator.clipboard.writeText(promptText);
+                        alert(type === 'narrative' ? '✅ 敘述型條件已成功複製！' : '✅ 結構化 Prompt 已成功複製！');
+                    } else {
+                        // 舊版 Fallback
+                        finalPromptText.select();
+                        document.execCommand('copy');
+                        alert(type === 'narrative' ? '✅ 敘述型條件已成功複製！' : '✅ 結構化 Prompt 已成功複製！');
+                    }
+                } catch (err) {
+                    alert('⚠️ 自動複製被瀏覽器阻擋，請手動長按下方文字框進行複製。');
+                    console.error('複製失敗:', err);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
