@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 全方位指令架構師</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #4F46E5;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #4F46E5;
+        }
+        #advanced-section {
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen py-8 px-4 font-sans">
+    <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
+        
+        <!-- Header -->
+        <div class="bg-indigo-900 p-8 text-white">
+            <div class="flex justify-between items-start">
+                <div>
+                    <h1 class="text-3xl font-bold tracking-tight">AI 全方位指令架構師</h1>
+                    <p class="text-indigo-200 mt-2">優化目標：<span class="font-semibold text-white border-b border-indigo-400 pb-1">設計專屬 AI 兒童溫習導師</span></p>
+                </div>
+                <!-- Mode Toggle -->
+                <div class="flex items-center bg-indigo-800 rounded-lg p-1">
+                    <button type="button" onclick="setMode('simple')" id="btn-simple" class="px-4 py-2 rounded-md text-sm font-medium transition-all bg-white text-indigo-900 shadow-sm">快速評估</button>
+                    <button type="button" onclick="setMode('detailed')" id="btn-detailed" class="px-4 py-2 rounded-md text-sm font-medium transition-all text-indigo-200 hover:text-white">深度分析 (20+ 參數)</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-8">
+            <form id="prompt-form" class="space-y-8">
+                
+                <!-- SECTION 1: ESSENTIAL (Always Visible) -->
+                <div>
+                    <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3">1</span>
+                        核心參數 (必填)
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-3">
+                            <label class="block text-sm font-semibold text-gray-700">科目與課題 (Subject & Topic)</label>
+                            <input type="text" name="Subject_and_Topic" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" placeholder="例如：小三數學（分數）、小五英文（Past Tense）">
+                        </div>
+                        <div class="space-y-3">
+                            <label class="block text-sm font-semibold text-gray-700">年級/年齡 (Grade/Age)</label>
+                            <select name="Grade_and_Age" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="幼稚園 (3-6歲)">幼稚園 (3-6歲)</option>
+                                <option value="初小 (小一至小三)">初小 (小一至小三)</option>
+                                <option value="高小 (小四至小六)">高小 (小四至小六)</option>
+                                <option value="初中 (中一至中三)">初中 (中一至中三)</option>
+                                <option value="高中 (中四至中六)">高中 (中四至中六)</option>
+                            </select>
+                        </div>
+                        <div class="space-y-3">
+                            <label class="block text-sm font-semibold text-gray-700">溫習目標 (Study Goal)</label>
+                            <select name="Study_Goal" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="準備測驗/考試 (操卷與重點複習)">準備測驗/考試 (操卷與重點複習)</option>
+                                <option value="釐清基本概念 (白紙狀態)">釐清基本概念 (白紙狀態)</option>
+                                <option value="功課輔導 (解題與引導)">功課輔導 (解題與引導)</option>
+                                <option value="拔尖挑戰 (進階題目)">拔尖挑戰 (進階題目)</option>
+                            </select>
+                        </div>
+                        <div class="space-y-3">
+                            <label class="block text-sm font-semibold text-gray-700">期望形式 (Output Format)</label>
+                            <select name="Output_Format" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="互動問答 (一問一答)">互動問答 (一問一答)</option>
+                                <option value="模擬測驗 (出5-10題選擇/問答題)">模擬測驗 (出5-10題選擇/問答題)</option>
+                                <option value="故事形式 (用故事包裝知識點)">故事形式 (用故事包裝知識點)</option>
+                                <option value="心智圖/重點筆記整理">心智圖/重點筆記整理</option>
+                            </select>
+                        </div>
+                        <div class="space-y-3">
+                            <label class="block text-sm font-semibold text-gray-700">目前程度 (Current Level)</label>
+                            <select name="Current_Level" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="基礎薄弱 (需要耐心補底)">基礎薄弱 (需要耐心補底)</option>
+                                <option value="中等水平 (偶爾粗心或卡關)">中等水平 (偶爾粗心或卡關)</option>
+                                <option value="成績優異 (需要更高難度挑戰)">成績優異 (需要更高難度挑戰)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 2: DEEP DIVE (Hidden by default) -->
+                <div id="advanced-section" class="hidden">
+                    <div class="relative py-4">
+                        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                            <div class="w-full border-t border-gray-300"></div>
+                        </div>
+                        <div class="relative flex justify-center">
+                            <span class="bg-white px-3 text-sm font-medium text-gray-500">進階詳細設定</span>
+                        </div>
+                    </div>
+
+                    <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="bg-purple-100 text-purple-700 w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3">2</span>
+                        深度微調參數 (選填)
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 bg-gray-50 rounded-xl border border-gray-200">
+                        <div class="space-y-3">
+                            <label class="block text-sm font-semibold text-gray-700">AI 角色設定 (AI Persona)</label>
+                            <select name="AI_Persona" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="溫柔鼓勵的幼稚園老師">溫柔鼓勵的幼稚園老師</option>
+                                <option value="幽默風趣的補習哥哥/姐姐">幽默風趣的補習哥哥/姐姐</option>
+                                <option value="嚴格但專業的學校老師">嚴格但專業的學校老師</option>
+                                <option value="小朋友喜歡的卡通角色 (如偵探、魔法師)">小朋友喜歡的卡通角色 (如偵探、魔法師)</option>
+                            </select>
+                        </div>
+                        <div class="space-y-3">
+                            <label class="block text-sm font-semibold text-gray-700">引導方式 (Feedback Mechanism)</label>
+                            <select name="Feedback_Mechanism" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="蘇格拉底式提問 (絕不直接給答案，一步步引導)">蘇格拉底式提問 (絕不直接給答案，一步步引導)</option>
+                                <option value="給予提示後公佈答案 (給2次機會再開估)">給予提示後公佈答案 (給2次機會再開估)</option>
+                                <option value="直接給出詳細解題步驟">直接給出詳細解題步驟</option>
+                            </select>
+                        </div>
+                        <div class="space-y-3">
+                            <label class="block text-sm font-semibold text-gray-700">學習風格 (Learning Style)</label>
+                            <select name="Learning_Style" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="視覺型 (多用Emoji、圖表、排版清晰)">視覺型 (多用Emoji、圖表、排版清晰)</option>
+                                <option value="生活實踐型 (多用日常生活的例子)">生活實踐型 (多用日常生活的例子)</option>
+                                <option value="邏輯分析型 (強調因果關係與推導)">邏輯分析型 (強調因果關係與推導)</option>
+                            </select>
+                        </div>
+                        <div class="space-y-3">
+                            <label class="block text-sm font-semibold text-gray-700">語言設定 (Language)</label>
+                            <select name="Language" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="全繁體中文 (廣東話口吻)">全繁體中文 (廣東話口吻)</option>
+                                <option value="全繁體中文 (書面語)">全繁體中文 (書面語)</option>
+                                <option value="中英夾雜 (適合香港學生)">中英夾雜 (適合香港學生)</option>
+                                <option value="全英文 (訓練語境)">全英文 (訓練語境)</option>
+                            </select>
+                        </div>
+                        <div class="space-y-3">
+                            <label class="block text-sm font-semibold text-gray-700">舉例方式 (Examples Style)</label>
+                            <select name="Examples_Style" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="遊戲/動漫元素 (如 Minecraft, Pokemon)">遊戲/動漫元素 (如 Minecraft, Pokemon)</option>
+                                <option value="日常生活 (如買餸、搭車、分零食)">日常生活 (如買餸、搭車、分零食)</option>
+                                <option value="科學/自然現象">科學/自然現象</option>
+                            </select>
+                        </div>
+                        <div class="space-y-3">
+                            <label class="block text-sm font-semibold text-gray-700">激勵機制 (Motivation)</label>
+                            <select name="Motivation" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="積分/升級系統 (答對加分)">積分/升級系統 (答對加分)</option>
+                                <option value="口頭大力稱讚與 Emoji 鼓勵">口頭大力稱讚與 Emoji 鼓勵</option>
+                                <option value="解鎖故事劇情">解鎖故事劇情</option>
+                            </select>
+                        </div>
+                        <div class="space-y-3">
+                            <label class="block text-sm font-semibold text-gray-700">難度調整 (Difficulty Progression)</label>
+                            <select name="Difficulty_Progression" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="自適應 (答對變難，答錯變易)">自適應 (答對變難，答錯變易)</option>
+                                <option value="固定難度">固定難度</option>
+                                <option value="階梯式 (由淺入深，每3題升級)">階梯式 (由淺入深，每3題升級)</option>
+                            </select>
+                        </div>
+                        <div class="space-y-3">
+                            <label class="block text-sm font-semibold text-gray-700">溫習時間/題數限制 (Session Limits)</label>
+                            <input type="text" name="Session_Limits" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" placeholder="例如：每次只問5題，或預計15分鐘完成">
+                        </div>
+                        <div class="space-y-3">
+                            <label class="block text-sm font-semibold text-gray-700">特殊需求 (Special Needs)</label>
+                            <input type="text" name="Special_Needs" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" placeholder="例如：有ADHD需要指令簡短、有讀寫障礙需要多用點列式">
+                        </div>
+                        <div class="space-y-3">
+                            <label class="block text-sm font-semibold text-gray-700">糾錯態度 (Error Correction)</label>
+                            <select name="Error_Correction" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="溫和包容 (強調錯誤是學習的一部分)">溫和包容 (強調錯誤是學習的一部分)</option>
+                                <option value="嚴格指出 (直接點出盲點)">嚴格指出 (直接點出盲點)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+            <!-- Action Buttons -->
+            <div class="mt-10 pt-6 border-t border-gray-100 flex flex-col sm:flex-row gap-4">
+                <button type="button" onclick="handleAction('share')" class="flex-1 flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-6 rounded-xl transition shadow-lg transform active:scale-98">
+                    手機分享
+                </button>
+                <button type="button" onclick="handleAction('copy')" class="flex-1 flex items-center justify-center bg-white hover:bg-gray-50 text-gray-700 font-bold py-4 px-6 rounded-xl border-2 border-gray-200 transition transform active:scale-98">
+                    結構化複製
+                </button>
+                <button type="button" onclick="handleAction('narrative')" class="flex-1 flex items-center justify-center bg-teal-600 hover:bg-teal-700 text-white font-bold py-4 px-6 rounded-xl transition shadow-lg transform active:scale-98">
+                    轉為敘述並複製
+                </button>
+            </div>
+
+            <!-- 終極保險：結果顯示框 (預設隱藏，撳掣後顯示) -->
+            <div id="result-box" class="hidden mt-8 p-6 bg-gray-50 rounded-xl border border-gray-200 shadow-inner">
+                <h3 class="text-sm font-bold text-gray-700 mb-3 flex items-center">
+                    <span>✨ 生成結果</span>
+                    <span class="ml-2 text-xs font-normal text-gray-500">(如無法自動複製，請手動全選下方文字)</span>
+                </h3>
+                <textarea id="final-prompt-text" class="w-full h-64 p-4 text-sm font-mono text-gray-800 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" readonly></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mode Switching Logic
+        function setMode(mode) {
+            const advancedSection = document.getElementById('advanced-section');
+            const btnSimple = document.getElementById('btn-simple');
+            const btnDetailed = document.getElementById('btn-detailed');
+
+            if (mode === 'simple') {
+                advancedSection.classList.add('hidden');
+                btnSimple.className = "px-4 py-2 rounded-md text-sm font-medium transition-all bg-white text-indigo-900 shadow-sm";
+                btnDetailed.className = "px-4 py-2 rounded-md text-sm font-medium transition-all text-indigo-200 hover:text-white";
+            } else {
+                advancedSection.classList.remove('hidden');
+                btnSimple.className = "px-4 py-2 rounded-md text-sm font-medium transition-all text-indigo-200 hover:text-white";
+                btnDetailed.className = "px-4 py-2 rounded-md text-sm font-medium transition-all bg-white text-indigo-900 shadow-sm";
+            }
+        }
+
+        function generatePrompt() {
+            const form = document.getElementById('prompt-form');
+            const formData = new FormData(form);
+            let contextParts = [];
+            const baseRequest = "設計專屬 AI 兒童溫習導師";
+            
+            for (let [key, value] of formData.entries()) {
+                if(value && value.trim() !== "") {
+                    let readableKey = key.replace(/_/g, ' ');
+                    contextParts.push(`### ${readableKey}\n${value}`);
+                }
+            }
+
+            return `
+# 🚀 Expert Prompt Request
+**Task**: ${baseRequest}
+
+---
+## 📋 Context & Requirements
+The following details define the scope and style of the response:
+
+${contextParts.join('\n\n')}
+
+---
+## 🎯 Output Instruction
+Please act as a world-class expert in this field. Analyze the requirements above and provide a comprehensive, high-quality response that strictly adheres to the constraints and tone specified.
+`.trim();
+        }
+
+        async function handleAction(type) {
+            let promptText = "";
+            const baseRequest = "設計專屬 AI 兒童溫習導師";
+            const resultBox = document.getElementById('result-box');
+            const finalPromptText = document.getElementById('final-prompt-text');
+            
+            // 1. 準備要複製/分享嘅文字
+            if (type === 'narrative') {
+                const form = document.getElementById('prompt-form');
+                const formData = new FormData(form);
+                let details = [];
+                
+                for (let [key, value] of formData.entries()) {
+                    if(value && value.trim() !== "") {
+                        let readableKey = key.replace(/_/g, ' ');
+                        details.push(`關於「${readableKey}」請設定為「${value}」`);
+                    }
+                }
+                
+                promptText = baseRequest;
+                if(details.length > 0) {
+                    promptText += `並參考以下條件：\n${details.join('；\n')}。`;
+                }
+            } else {
+                promptText = generatePrompt();
+            }
+
+            // 2. 顯示結果框 (雙重保險)
+            finalPromptText.value = promptText;
+            resultBox.classList.remove('hidden');
+
+            // 3. 執行動作
+            if (type === 'share') {
+                if (navigator.share) {
+                    try { 
+                        await navigator.share({ 
+                            title: 'Super Prompt', 
+                            text: promptText 
+                        }); 
+                    } catch (err) { 
+                        console.log('分享已取消或失敗', err); 
+                    }
+                } else {
+                    alert('你的瀏覽器暫時不支援原生分享，請直接複製下方文字框內容。');
+                }
+            } else {
+                // 嘗試複製
+                try {
+                    // 新版 API
+                    if (navigator.clipboard && window.isSecureContext) {
+                        await navigator.clipboard.writeText(promptText);
+                        alert(type === 'narrative' ? '✅ 敘述型條件已成功複製！' : '✅ 結構化 Prompt 已成功複製！');
+                    } else {
+                        // 舊版 Fallback
+                        finalPromptText.select();
+                        document.execCommand('copy');
+                        alert(type === 'narrative' ? '✅ 敘述型條件已成功複製！' : '✅ 結構化 Prompt 已成功複製！');
+                    }
+                } catch (err) {
+                    alert('⚠️ 自動複製被瀏覽器阻擋，請手動長按下方文字框進行複製。');
+                    console.error('複製失敗:', err);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
