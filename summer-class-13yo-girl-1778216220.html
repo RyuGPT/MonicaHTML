@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 全方位指令架構師</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #4F46E5;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #4F46E5;
+        }
+        #advanced-section {
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen py-8 px-4 font-sans">
+    <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
+        
+        <!-- Header -->
+        <div class="bg-indigo-900 p-8 text-white">
+            <div class="flex justify-between items-start">
+                <div>
+                    <h1 class="text-3xl font-bold tracking-tight">AI 全方位指令架構師</h1>
+                    <p class="text-indigo-200 mt-2">優化目標：<span class="font-semibold text-white border-b border-indigo-400 pb-1">幫我13歲嘅女選一個暑期興趣班</span></p>
+                </div>
+                <!-- Mode Toggle -->
+                <div class="flex items-center bg-indigo-800 rounded-lg p-1">
+                    <button type="button" onclick="setMode('simple')" id="btn-simple" class="px-4 py-2 rounded-md text-sm font-medium transition-all bg-white text-indigo-900 shadow-sm">快速評估</button>
+                    <button type="button" onclick="setMode('detailed')" id="btn-detailed" class="px-4 py-2 rounded-md text-sm font-medium transition-all text-indigo-200 hover:text-white">深度分析 (20+ 參數)</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-8">
+            <form id="prompt-form" class="space-y-8">
+                
+                <!-- SECTION 1: ESSENTIAL (Always Visible) -->
+                <div>
+                    <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3">1</span>
+                        核心參數 (必填)
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <!-- Q1: Interest Area -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">主要興趣領域</label>
+                            <select name="主要興趣領域" class="w-full p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="STEM/編程/科學">STEM / 編程 / 科學</option>
+                                <option value="藝術/設計/攝影">藝術 / 設計 / 攝影</option>
+                                <option value="運動/戶外活動">運動 / 戶外活動</option>
+                                <option value="音樂/舞蹈/戲劇">音樂 / 舞蹈 / 戲劇</option>
+                                <option value="語言/寫作/演講">語言 / 寫作 / 演講</option>
+                                <option value="領袖訓練/義工">領袖訓練 / 義工</option>
+                                <option value="未有明確方向，求推薦">未有明確方向，求推薦</option>
+                            </select>
+                        </div>
+
+                        <!-- Q2: Format -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">上課模式</label>
+                            <select name="上課模式" class="w-full p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="實體半日班">實體半日班</option>
+                                <option value="實體全日營">實體全日營</option>
+                                <option value="過夜宿營 (Overnight Camp)">過夜宿營 (Overnight Camp)</option>
+                                <option value="線上課程 (Online)">線上課程 (Online)</option>
+                                <option value="海外遊學團">海外遊學團</option>
+                            </select>
+                        </div>
+
+                        <!-- Q3: Budget -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">預算範圍 (整個暑假)</label>
+                            <select name="預算範圍" class="w-full p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="免費或政府/非牟利機構資助">免費或政府/非牟利機構資助</option>
+                                <option value="HK$1,000 - $3,000">HK$1,000 - $3,000</option>
+                                <option value="HK$3,000 - $8,000">HK$3,000 - $8,000</option>
+                                <option value="HK$8,000 - $15,000">HK$8,000 - $15,000</option>
+                                <option value="無特定預算，質素優先">無特定預算，質素優先</option>
+                            </select>
+                        </div>
+
+                        <!-- Q4: Location -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">首選地區</label>
+                            <select name="首選地區" class="w-full p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="香港島">香港島</option>
+                                <option value="九龍區">九龍區</option>
+                                <option value="新界區">新界區</option>
+                                <option value="全港皆可">全港皆可</option>
+                                <option value="海外">海外</option>
+                            </select>
+                        </div>
+
+                        <!-- Q5: Primary Goal -->
+                        <div class="space-y-2 md:col-span-2">
+                            <label class="block text-sm font-semibold text-gray-700">參加興趣班的主要目標</label>
+                            <div class="flex flex-wrap gap-4">
+                                <label class="flex items-center space-x-2"><input type="radio" name="主要目標" value="發掘新興趣，純粹玩樂放鬆" class="text-indigo-600 focus:ring-indigo-500"><span>發掘新興趣，純粹玩樂放鬆</span></label>
+                                <label class="flex items-center space-x-2"><input type="radio" name="主要目標" value="提升特定技能 (如考級、比賽)" class="text-indigo-600 focus:ring-indigo-500"><span>提升特定技能 (如考級、比賽)</span></label>
+                                <label class="flex items-center space-x-2"><input type="radio" name="主要目標" value="擴闊社交圈子，結識新朋友" class="text-indigo-600 focus:ring-indigo-500"><span>擴闊社交圈子，結識新朋友</span></label>
+                                <label class="flex items-center space-x-2"><input type="radio" name="主要目標" value="為未來升學/履歷鋪路" class="text-indigo-600 focus:ring-indigo-500"><span>為未來升學/履歷鋪路</span></label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- SECTION 2: DEEP DIVE (Hidden by default) -->
+                <div id="advanced-section" class="hidden">
+                    <div class="relative py-4">
+                        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                            <div class="w-full border-t border-gray-300"></div>
+                        </div>
+                        <div class="relative flex justify-center">
+                            <span class="bg-white px-3 text-sm font-medium text-gray-500">進階詳細設定</span>
+                        </div>
+                    </div>
+
+                    <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="bg-purple-100 text-purple-700 w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3">2</span>
+                        深度微調參數 (選填)
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 bg-gray-50 rounded-xl border border-gray-200">
+                        
+                        <!-- Q6: Personality -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">女兒性格特質</label>
+                            <select name="女兒性格特質" class="w-full p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="外向活潑，喜歡群體活動">外向活潑，喜歡群體活動</option>
+                                <option value="內向文靜，偏好個人或小組">內向文靜，偏好個人或小組</option>
+                                <option value="富好奇心，喜歡挑戰新事物">富好奇心，喜歡挑戰新事物</option>
+                                <option value="需要較多引導和鼓勵">需要較多引導和鼓勵</option>
+                            </select>
+                        </div>
+
+                        <!-- Q7: Duration -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">課程時長</label>
+                            <select name="課程時長" class="w-full p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="單次體驗坊 (1-2天)">單次體驗坊 (1-2天)</option>
+                                <option value="短期密集營 (1星期)">短期密集營 (1星期)</option>
+                                <option value="中期課程 (2-4星期)">中期課程 (2-4星期)</option>
+                                <option value="貫穿整個暑假 (每週1-2堂)">貫穿整個暑假 (每週1-2堂)</option>
+                            </select>
+                        </div>
+
+                        <!-- Q8: Language -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">授課語言</label>
+                            <select name="授課語言" class="w-full p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="廣東話為主">廣東話為主</option>
+                                <option value="全英語環境 (沉浸式)">全英語環境 (沉浸式)</option>
+                                <option value="普通話">普通話</option>
+                                <option value="雙語 (中英)">雙語 (中英)</option>
+                            </select>
+                        </div>
+
+                        <!-- Q9: Previous Experience -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">過往相關經驗</label>
+                            <select name="過往相關經驗" class="w-full p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="完全零基礎 (Beginner)">完全零基礎 (Beginner)</option>
+                                <option value="有基本概念 (Intermediate)">有基本概念 (Intermediate)</option>
+                                <option value="已有一定水平，尋求進階 (Advanced)">已有一定水平，尋求進階 (Advanced)</option>
+                            </select>
+                        </div>
+
+                        <!-- Q10: Certification -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">證書或成果要求</label>
+                            <div class="flex flex-col space-y-2 mt-2">
+                                <label class="flex items-center space-x-2"><input type="radio" name="證書要求" value="必須有認可證書" class="text-indigo-600"><span>必須有認可證書</span></label>
+                                <label class="flex items-center space-x-2"><input type="radio" name="證書要求" value="希望有作品集或結業表演" class="text-indigo-600"><span>希望有作品集或結業表演</span></label>
+                                <label class="flex items-center space-x-2"><input type="radio" name="證書要求" value="不需要，過程開心最重要" class="text-indigo-600"><span>不需要，過程開心最重要</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q11: Teacher-Student Ratio -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">期望師生比例</label>
+                            <div class="flex flex-col space-y-2 mt-2">
+                                <label class="flex items-center space-x-2"><input type="radio" name="師生比例" value="1對1 或 1對2" class="text-indigo-600"><span>1對1 或 1對2 (高度關注)</span></label>
+                                <label class="flex items-center space-x-2"><input type="radio" name="師生比例" value="小班教學 (1:4 - 1:8)" class="text-indigo-600"><span>小班教學 (1:4 - 1:8)</span></label>
+                                <label class="flex items-center space-x-2"><input type="radio" name="師生比例" value="大班活動 (1:10 以上)" class="text-indigo-600"><span>大班活動 (1:10 以上)</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q12: Transportation -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">交通及接送安排</label>
+                            <select name="交通安排" class="w-full p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="女兒可自行乘搭交通工具前往">女兒可自行乘搭交通工具前往</option>
+                                <option value="家長會親自接送">家長會親自接送</option>
+                                <option value="必須有校巴/專車接送服務">必須有校巴/專車接送服務</option>
+                            </select>
+                        </div>
+
+                        <!-- Q13: Peer Age Group -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">同學年齡層</label>
+                            <select name="同學年齡層" class="w-full p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="">請選擇...</option>
+                                <option value="嚴格限制在初中生 (12-14歲)">嚴格限制在初中生 (12-14歲)</option>
+                                <option value="混合年齡 (例如 10-15歲)">混合年齡 (例如 10-15歲)</option>
+                                <option value="無所謂">無所謂</option>
+                            </select>
+                        </div>
+
+                        <!-- Q14: Schedule Constraints -->
+                        <div class="space-y-2 md:col-span-2">
+                            <label class="block text-sm font-semibold text-gray-700">時間表限制 (如：避開8月首週、只能週末等)</label>
+                            <textarea name="時間表限制" rows="2" class="w-full p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" placeholder="例如：7月中要去旅行，只能報8月的班..."></textarea>
+                        </div>
+
+                        <!-- Q15: AI Output Style -->
+                        <div class="space-y-2 md:col-span-2">
+                            <label class="block text-sm font-semibold text-gray-700">AI 推薦風格</label>
+                            <select name="AI推薦風格" class="w-full p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                <option value="提供 3-5 個具體類別建議，並列出優缺點及預期收穫">提供 3-5 個具體類別建議，並列出優缺點及預期收穫</option>
+                                <option value="創意發想：推薦冷門但極具潛力的特色興趣班">創意發想：推薦冷門但極具潛力的特色興趣班</option>
+                                <option value="實用導向：直接列出香港常見的機構名稱及大約收費參考">實用導向：直接列出香港常見的機構名稱及大約收費參考</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+
+            </form>
+
+            <!-- Action Buttons -->
+            <div class="mt-10 pt-6 border-t border-gray-100 flex flex-col sm:flex-row gap-4">
+                <button type="button" onclick="handleAction('share')" class="flex-1 flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-6 rounded-xl transition shadow-lg transform active:scale-98">
+                    手機分享
+                </button>
+                <button type="button" onclick="handleAction('copy')" class="flex-1 flex items-center justify-center bg-white hover:bg-gray-50 text-gray-700 font-bold py-4 px-6 rounded-xl border-2 border-gray-200 transition transform active:scale-98">
+                    結構化複製
+                </button>
+                <button type="button" onclick="handleAction('narrative')" class="flex-1 flex items-center justify-center bg-teal-600 hover:bg-teal-700 text-white font-bold py-4 px-6 rounded-xl transition shadow-lg transform active:scale-98">
+                    轉為敘述並複製
+                </button>
+            </div>
+
+            <!-- 終極保險：結果顯示框 (預設隱藏，撳掣後顯示) -->
+            <div id="result-box" class="hidden mt-8 p-6 bg-gray-50 rounded-xl border border-gray-200 shadow-inner">
+                <h3 class="text-sm font-bold text-gray-700 mb-3 flex items-center">
+                    <span>✨ 生成結果</span>
+                    <span class="ml-2 text-xs font-normal text-gray-500">(如無法自動複製，請手動全選下方文字)</span>
+                </h3>
+                <textarea id="final-prompt-text" class="w-full h-64 p-4 text-sm font-mono text-gray-800 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" readonly></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mode Switching Logic
+        function setMode(mode) {
+            const advancedSection = document.getElementById('advanced-section');
+            const btnSimple = document.getElementById('btn-simple');
+            const btnDetailed = document.getElementById('btn-detailed');
+
+            if (mode === 'simple') {
+                advancedSection.classList.add('hidden');
+                btnSimple.className = "px-4 py-2 rounded-md text-sm font-medium transition-all bg-white text-indigo-900 shadow-sm";
+                btnDetailed.className = "px-4 py-2 rounded-md text-sm font-medium transition-all text-indigo-200 hover:text-white";
+            } else {
+                advancedSection.classList.remove('hidden');
+                btnSimple.className = "px-4 py-2 rounded-md text-sm font-medium transition-all text-indigo-200 hover:text-white";
+                btnDetailed.className = "px-4 py-2 rounded-md text-sm font-medium transition-all bg-white text-indigo-900 shadow-sm";
+            }
+        }
+
+        function generatePrompt() {
+            const form = document.getElementById('prompt-form');
+            const formData = new FormData(form);
+            let contextParts = [];
+            const baseRequest = "幫我13歲嘅女選一個暑期興趣班";
+            
+            for (let [key, value] of formData.entries()) {
+                if(value && value.trim() !== "") {
+                    let readableKey = key.replace(/_/g, ' ');
+                    contextParts.push(`### ${readableKey}\n${value}`);
+                }
+            }
+
+            return `
+# 🚀 Expert Prompt Request
+**Task**: ${baseRequest}
+
+---
+## 📋 Context & Requirements
+The following details define the scope and style of the response:
+
+${contextParts.join('\n\n')}
+
+---
+## 🎯 Output Instruction
+Please act as a world-class expert in this field. Analyze the requirements above and provide a comprehensive, high-quality response that strictly adheres to the constraints and tone specified.
+`.trim();
+        }
+
+        async function handleAction(type) {
+            let promptText = "";
+            const baseRequest = "幫我13歲嘅女選一個暑期興趣班";
+            const resultBox = document.getElementById('result-box');
+            const finalPromptText = document.getElementById('final-prompt-text');
+            
+            // 1. 準備要複製/分享嘅文字
+            if (type === 'narrative') {
+                const form = document.getElementById('prompt-form');
+                const formData = new FormData(form);
+                let details = [];
+                
+                for (let [key, value] of formData.entries()) {
+                    if(value && value.trim() !== "") {
+                        let readableKey = key.replace(/_/g, ' ');
+                        details.push(`關於「${readableKey}」請設定為「${value}」`);
+                    }
+                }
+                
+                promptText = baseRequest;
+                if(details.length > 0) {
+                    promptText += `並參考以下條件：\n${details.join('；\n')}。`;
+                }
+            } else {
+                promptText = generatePrompt();
+            }
+
+            // 2. 顯示結果框 (雙重保險)
+            finalPromptText.value = promptText;
+            resultBox.classList.remove('hidden');
+
+            // 3. 執行動作
+            if (type === 'share') {
+                if (navigator.share) {
+                    try { 
+                        await navigator.share({ 
+                            title: 'Super Prompt', 
+                            text: promptText 
+                        }); 
+                    } catch (err) { 
+                        console.log('分享已取消或失敗', err); 
+                    }
+                } else {
+                    alert('你的瀏覽器暫時不支援原生分享，請直接複製下方文字框內容。');
+                }
+            } else {
+                // 嘗試複製
+                try {
+                    // 新版 API
+                    if (navigator.clipboard && window.isSecureContext) {
+                        await navigator.clipboard.writeText(promptText);
+                        alert(type === 'narrative' ? '✅ 敘述型條件已成功複製！' : '✅ 結構化 Prompt 已成功複製！');
+                    } else {
+                        // 舊版 Fallback
+                        finalPromptText.select();
+                        document.execCommand('copy');
+                        alert(type === 'narrative' ? '✅ 敘述型條件已成功複製！' : '✅ 結構化 Prompt 已成功複製！');
+                    }
+                } catch (err) {
+                    alert('⚠️ 自動複製被瀏覽器阻擋，請手動長按下方文字框進行複製。');
+                    console.error('複製失敗:', err);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
