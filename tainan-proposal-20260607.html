@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>台南 活動提案清單</title>
+    <style>
+        body { font-family: 'PingFang HK', sans-serif; background-color: #f4f7f6; color: #333; padding: 30px; max-width: 800px; margin: 0 auto; }
+        .container { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        h1 { text-align: center; color: #2c3e50; }
+        .category { margin-bottom: 30px; }
+        .category h3 { color: #3b82f6; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .check-all { transform: scale(1.2); cursor: pointer; }
+        .item-list { list-style: none; padding: 0; }
+        .item-list li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; font-size: 1.1rem; }
+        input[type="checkbox"] { transform: scale(1.2); cursor: pointer; }
+        .yt-link { text-decoration: none; background-color: #fee2e2; color: #dc2626; font-size: 0.85rem; padding: 4px 10px; border-radius: 20px; font-weight: bold; }
+        .btn-group { display: flex; gap: 15px; justify-content: center; margin-top: 40px; }
+        button { padding: 12px 24px; font-size: 1rem; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; transition: 0.2s; color: #fff; }
+        .btn-copy { background-color: #3b82f6; }
+        .btn-copy:hover { background-color: #2563eb; }
+        .btn-wa { background-color: #25D366; }
+        .btn-wa:hover { background-color: #1ebc5c; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>✈️ 台南 活動提案</h1>
+    <p style="text-align: center; color: #64748b;">請勾選您感興趣的項目，完成後點擊下方按鈕。</p>
+
+    <!-- 類別：美食 -->
+    <div class="category">
+        <h3>🍽️ 美食 <label style="font-size: 0.9rem; color: #64748b; font-weight: normal;"><input type="checkbox" class="check-all" onchange="toggleAll(this, 'food-item')"> 全選</label></h3>
+        <ul class="item-list">
+            <li>
+                <input type="checkbox" class="food-item" value="文章牛肉湯"> 文章牛肉湯 
+                <a href="https://www.youtube.com/results?search_query=台南+文章牛肉湯" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="food-item" value="阿堂鹹粥"> 阿堂鹹粥 
+                <a href="https://www.youtube.com/results?search_query=台南+阿堂鹹粥" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="food-item" value="富盛號碗粿"> 富盛號碗粿 
+                <a href="https://www.youtube.com/results?search_query=台南+富盛號碗粿" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="food-item" value="同記安平豆花"> 同記安平豆花 
+                <a href="https://www.youtube.com/results?search_query=台南+同記安平豆花" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="food-item" value="丹丹漢堡"> 丹丹漢堡 (南部限定)
+                <a href="https://www.youtube.com/results?search_query=台南+丹丹漢堡" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="food-item" value="度小月擔仔麵"> 度小月擔仔麵 
+                <a href="https://www.youtube.com/results?search_query=台南+度小月擔仔麵" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 類別：景點 -->
+    <div class="category">
+        <h3>📸 景點 <label style="font-size: 0.9rem; color: #64748b; font-weight: normal;"><input type="checkbox" class="check-all" onchange="toggleAll(this, 'attraction-item')"> 全選</label></h3>
+        <ul class="item-list">
+            <li>
+                <input type="checkbox" class="attraction-item" value="奇美博物館"> 奇美博物館 
+                <a href="https://www.youtube.com/results?search_query=台南+奇美博物館" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="attraction-item" value="台南市美術館二館"> 台南市美術館二館 
+                <a href="https://www.youtube.com/results?search_query=台南+美術館二館" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="attraction-item" value="安平古堡與安平樹屋"> 安平古堡與安平樹屋 
+                <a href="https://www.youtube.com/results?search_query=台南+安平古堡+安平樹屋" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="attraction-item" value="赤崁樓"> 赤崁樓 
+                <a href="https://www.youtube.com/results?search_query=台南+赤崁樓" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="attraction-item" value="神農街"> 神農街 (文青老街)
+                <a href="https://www.youtube.com/results?search_query=台南+神農街" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="attraction-item" value="林百貨"> 林百貨 (復古百貨公司)
+                <a href="https://www.youtube.com/results?search_query=台南+林百貨" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 類別：活動/體驗 -->
+    <div class="category">
+        <h3>🎢 活動/體驗 <label style="font-size: 0.9rem; color: #64748b; font-weight: normal;"><input type="checkbox" class="check-all" onchange="toggleAll(this, 'activity-item')"> 全選</label></h3>
+        <ul class="item-list">
+            <li>
+                <input type="checkbox" class="activity-item" value="四草綠色隧道乘船"> 四草綠色隧道乘船 (台版亞馬遜)
+                <a href="https://www.youtube.com/results?search_query=台南+四草綠色隧道" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="activity-item" value="十鼓仁糖文創園區"> 十鼓仁糖文創園區 (極限設施與打擊樂)
+                <a href="https://www.youtube.com/results?search_query=台南+十鼓仁糖文創園區" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="activity-item" value="花園夜市/大東夜市"> 逛花園夜市/大東夜市 (大大武花大武花)
+                <a href="https://www.youtube.com/results?search_query=台南+花園夜市" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="activity-item" value="漁光島看夕陽"> 漁光島漫步看夕陽 
+                <a href="https://www.youtube.com/results?search_query=台南+漁光島" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="activity-item" value="安平老街旗袍體驗"> 安平老街旗袍體驗 
+                <a href="https://www.youtube.com/results?search_query=台南+安平旗袍體驗" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="btn-group">
+        <button class="btn-copy" onclick="copySelected()">📋 複製已選項目</button>
+        <button class="btn-wa" onclick="shareWhatsApp()">💬 WhatsApp 分享</button>
+    </div>
+</div>
+
+<script>
+    function toggleAll(source, className) {
+        let checkboxes = document.querySelectorAll('.' + className);
+        checkboxes.forEach(cb => cb.checked = source.checked);
+    }
+    function getSelectedText() {
+        let selected = [];
+        document.querySelectorAll('input[type="checkbox"]:not(.check-all):checked').forEach(cb => {
+            selected.push("- " + cb.value);
+        });
+        return selected.join('\n');
+    }
+    function copySelected() {
+        let text = getSelectedText();
+        if(!text) return alert('請先勾選至少一個項目！');
+        navigator.clipboard.writeText(text).then(() => {
+            alert('✅ 已成功複製！請將清單貼上回覆給 AI。');
+        }).catch(err => { alert('複製失敗，請手動選取複製。'); });
+    }
+    function shareWhatsApp() {
+        let text = getSelectedText();
+        if(!text) return alert('請先勾選至少一個項目！');
+        let message = '我的 台南 旅行心水清單：\n\n' + text;
+        let url = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(message);
+        window.open(url, '_blank');
+    }
+</script>
+</body>
+</html>
