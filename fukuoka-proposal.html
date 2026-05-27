@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>福岡 活動提案清單</title>
+    <style>
+        body { font-family: 'PingFang HK', sans-serif; background-color: #f4f7f6; color: #333; padding: 30px; max-width: 800px; margin: 0 auto; }
+        .container { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        h1 { text-align: center; color: #2c3e50; }
+        .category { margin-bottom: 30px; }
+        .category h3 { color: #3b82f6; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .check-all { transform: scale(1.2); cursor: pointer; }
+        .item-list { list-style: none; padding: 0; }
+        .item-list li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; font-size: 1.1rem; flex-wrap: wrap; }
+        input[type="checkbox"] { transform: scale(1.2); cursor: pointer; }
+        .yt-link { text-decoration: none; background-color: #fee2e2; color: #dc2626; font-size: 0.85rem; padding: 4px 10px; border-radius: 20px; font-weight: bold; white-space: nowrap; }
+        .btn-group { display: flex; gap: 15px; justify-content: center; margin-top: 40px; }
+        button { padding: 12px 24px; font-size: 1rem; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; transition: 0.2s; color: #fff; }
+        .btn-copy { background-color: #3b82f6; }
+        .btn-copy:hover { background-color: #2563eb; }
+        .btn-wa { background-color: #25D366; }
+        .btn-wa:hover { background-color: #1ebc5c; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>✈️ 福岡 活動提案</h1>
+    <p style="text-align: center; color: #64748b;">為您準備了豐富的美食與景點選項，請勾選您感興趣的項目，完成後點擊下方按鈕。</p>
+
+    <!-- 類別：美食 -->
+    <div class="category">
+        <h3>🍽️ 美食 (已為您特別增加大量選項) <label style="font-size: 0.9rem; color: #64748b; font-weight: normal;"><input type="checkbox" class="check-all" onchange="toggleAll(this, 'food-item')"> 全選</label></h3>
+        <ul class="item-list">
+            <li><input type="checkbox" class="food-item" value="一蘭拉麵總本店 (博多拉麵)"> 一蘭拉麵總本店 (朝聖總店限定) <a href="https://www.youtube.com/results?search_query=福岡+一蘭拉麵總本店" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="food-item" value="Shin-Shin 拉麵 (博多拉麵)"> Shin-Shin 拉麵 (在地人氣極高) <a href="https://www.youtube.com/results?search_query=福岡+Shin-Shin拉麵" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="food-item" value="暖暮拉麵 (博多拉麵)"> 暖暮拉麵 (九州拉麵總選舉第一名) <a href="https://www.youtube.com/results?search_query=福岡+暖暮拉麵" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="food-item" value="麵劇場 玄瑛 (特色拉麵)"> 麵劇場 玄瑛 (劇場風格特色拉麵) <a href="https://www.youtube.com/results?search_query=福岡+麵劇場玄瑛" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="food-item" value="楽天地 (牛腸鍋)"> 楽天地 (超浮誇韭菜牛腸鍋) <a href="https://www.youtube.com/results?search_query=福岡+楽天地牛腸鍋" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="food-item" value="やま中 (牛腸鍋)"> やま中 (Yamanaka 高級優雅牛腸鍋) <a href="https://www.youtube.com/results?search_query=福岡+やま中牛腸鍋" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="food-item" value="博多華味鳥 (水炊雞肉鍋)"> 博多華味鳥 (經典水炊雞肉鍋) <a href="https://www.youtube.com/results?search_query=福岡+博多華味鳥" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="food-item" value="水たき 長野 (水炊雞肉鍋)"> 水たき 長野 (百年歷史水炊鍋老店) <a href="https://www.youtube.com/results?search_query=福岡+水たき長野" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="food-item" value="元祖博多めんたい重 (明太子飯)"> 元祖博多めんたい重 (超人氣明太子飯) <a href="https://www.youtube.com/results?search_query=福岡+元祖博多めんたい重" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="food-item" value="稚加榮 (明太子與和食料理)"> 稚加榮 (豪華料亭午餐定食) <a href="https://www.youtube.com/results?search_query=福岡+稚加榮" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="food-item" value="葫蘆壽司 (排隊壽司)"> 葫蘆壽司 (天神區超高CP值排隊壽司) <a href="https://www.youtube.com/results?search_query=福岡+葫蘆壽司" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="food-item" value="柳橋連合市場 (海鮮)"> 柳橋連合市場 (博多的廚房，新鮮海鮮丼) <a href="https://www.youtube.com/results?search_query=福岡+柳橋連合市場" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="food-item" value="中洲屋台街"> 中洲屋台街 (河畔風情，串燒/關東煮/拉麵) <a href="https://www.youtube.com/results?search_query=福岡+中洲屋台街" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="food-item" value="天神屋台街"> 天神屋台街 (在地人最愛的宵夜小吃) <a href="https://www.youtube.com/results?search_query=福岡+天神屋台街" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="food-item" value="燒肉 多牛 (黑毛和牛)"> 燒肉 多牛 (極高CP值A4/A5黑毛和牛) <a href="https://www.youtube.com/results?search_query=福岡+燒肉多牛" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="food-item" value="鈴懸本店 (和菓子/甜點)"> 鈴懸本店 (精緻高級和菓子與聖代) <a href="https://www.youtube.com/results?search_query=福岡+鈴懸本店" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="food-item" value="FUK COFFEE"> FUK COFFEE (航空主題打卡咖啡廳) <a href="https://www.youtube.com/results?search_query=福岡+FUK+COFFEE" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="food-item" value="糸島海鮮/烤牡蠣 (季節限定)"> 糸島海鮮/烤牡蠣小屋 (冬季限定超鮮甜) <a href="https://www.youtube.com/results?search_query=福岡+糸島烤牡蠣" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+        </ul>
+    </div>
+
+    <!-- 類別：景點 -->
+    <div class="category">
+        <h3>📸 景點 <label style="font-size: 0.9rem; color: #64748b; font-weight: normal;"><input type="checkbox" class="check-all" onchange="toggleAll(this, 'spot-item')"> 全選</label></h3>
+        <ul class="item-list">
+            <li><input type="checkbox" class="spot-item" value="太宰府天滿宮"> 太宰府天滿宮 (學問之神與表參道星巴克) <a href="https://www.youtube.com/results?search_query=福岡+太宰府天滿宮" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="spot-item" value="糸島 (櫻井二見浦 夫婦岩)"> 糸島 櫻井二見浦 夫婦岩 (絕美海景與白色鳥居) <a href="https://www.youtube.com/results?search_query=福岡+糸島夫婦岩" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="spot-item" value="福岡塔 & 百道海濱公園"> 福岡塔 & 百道海濱公園 (浪漫夜景與沙灘) <a href="https://www.youtube.com/results?search_query=福岡+福岡塔" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="spot-item" value="大濠公園 & 舞鶴公園"> 大濠公園 & 舞鶴公園 (市區綠洲，賞櫻名所) <a href="https://www.youtube.com/results?search_query=福岡+大濠公園" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="spot-item" value="櫛田神社"> 櫛田神社 (博多總鎮守，巨大山笠花車) <a href="https://www.youtube.com/results?search_query=福岡+櫛田神社" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="spot-item" value="海之中道海濱公園"> 海之中道海濱公園 (四季花海與水族館) <a href="https://www.youtube.com/results?search_query=福岡+海之中道海濱公園" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="spot-item" value="南藏院 (青銅臥佛)"> 南藏院 (世界最大青銅臥佛，震撼視覺) <a href="https://www.youtube.com/results?search_query=福岡+南藏院" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="spot-item" value="柳川"> 柳川 (九州威尼斯，水鄉風情) <a href="https://www.youtube.com/results?search_query=福岡+柳川" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="spot-item" value="門司港懷舊區"> 門司港懷舊區 (大正浪漫建築與燒咖哩) <a href="https://www.youtube.com/results?search_query=福岡+門司港" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+        </ul>
+    </div>
+
+    <!-- 類別：活動/體驗 -->
+    <div class="category">
+        <h3>🎢 活動/體驗 <label style="font-size: 0.9rem; color: #64748b; font-weight: normal;"><input type="checkbox" class="check-all" onchange="toggleAll(this, 'activity-item')"> 全選</label></h3>
+        <ul class="item-list">
+            <li><input type="checkbox" class="activity-item" value="柳川遊船體驗"> 柳川遊船體驗 (伴隨船夫吟唱的愜意時光) <a href="https://www.youtube.com/results?search_query=福岡+柳川遊船" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="activity-item" value="太宰府和服租借體驗"> 太宰府和服租借體驗 (穿和服漫步古街) <a href="https://www.youtube.com/results?search_query=福岡+太宰府和服" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="activity-item" value="LaLaport 福岡 (1:1 鋼彈)"> LaLaport 福岡 (朝聖 1:1 實物大 ν鋼彈) <a href="https://www.youtube.com/results?search_query=福岡+LaLaport+鋼彈" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="activity-item" value="天神地下街 & 購物商圈"> 天神地下街 & 購物商圈 (九州最大購物天堂) <a href="https://www.youtube.com/results?search_query=福岡+天神地下街" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="activity-item" value="博多運河城 (水舞秀 & 購物)"> 博多運河城 (大型複合商場與精彩水舞秀) <a href="https://www.youtube.com/results?search_query=福岡+博多運河城" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="activity-item" value="福岡 PayPay Dome 看棒球"> 福岡 PayPay Dome 看職棒比賽 (軟銀鷹主場) <a href="https://www.youtube.com/results?search_query=福岡+PayPay+Dome" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+            <li><input type="checkbox" class="activity-item" value="萬葉之湯 (市區溫泉)"> 萬葉之湯 (市區內享受由布院/武雄直送溫泉) <a href="https://www.youtube.com/results?search_query=福岡+萬葉之湯" target="_blank" class="yt-link">▶️ YouTube 搜尋</a></li>
+        </ul>
+    </div>
+
+    <div class="btn-group">
+        <button class="btn-copy" onclick="copySelected()">📋 複製已選項目</button>
+        <button class="btn-wa" onclick="shareWhatsApp()">💬 WhatsApp 分享</button>
+    </div>
+</div>
+
+<script>
+    function toggleAll(source, className) {
+        let checkboxes = document.querySelectorAll('.' + className);
+        checkboxes.forEach(cb => cb.checked = source.checked);
+    }
+    function getSelectedText() {
+        let selected = [];
+        document.querySelectorAll('input[type="checkbox"]:not(.check-all):checked').forEach(cb => {
+            selected.push("- " + cb.value);
+        });
+        return selected.join('\n');
+    }
+    function copySelected() {
+        let text = getSelectedText();
+        if(!text) return alert('請先勾選至少一個項目！');
+        navigator.clipboard.writeText(text).then(() => {
+            alert('✅ 已成功複製！請將清單貼上回覆給 AI。');
+        }).catch(err => { alert('複製失敗，請手動選取複製。'); });
+    }
+    function shareWhatsApp() {
+        let text = getSelectedText();
+        if(!text) return alert('請先勾選至少一個項目！');
+        let message = '我的 福岡 旅行心水清單：\n\n' + text;
+        let url = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(message);
+        window.open(url, '_blank');
+    }
+</script>
+</body>
+</html>
