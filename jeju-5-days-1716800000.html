@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 全方位指令架構師</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #4F46E5;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #4F46E5;
+        }
+        #advanced-section {
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen py-8 px-4 font-sans">
+    <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
+        
+        <!-- Header -->
+        <div class="bg-indigo-900 p-8 text-white">
+            <div class="flex justify-between items-start">
+                <div>
+                    <h1 class="text-3xl font-bold tracking-tight">AI 全方位指令架構師</h1>
+                    <p class="text-indigo-200 mt-2">優化目標：<span class="font-semibold text-white border-b border-indigo-400 pb-1">韓國濟州5日</span></p>
+                </div>
+                <!-- Mode Toggle -->
+                <div class="flex items-center bg-indigo-800 rounded-lg p-1">
+                    <button type="button" onclick="setMode('simple')" id="btn-simple" class="px-4 py-2 rounded-md text-sm font-medium transition-all bg-white text-indigo-900 shadow-sm">快速評估</button>
+                    <button type="button" onclick="setMode('detailed')" id="btn-detailed" class="px-4 py-2 rounded-md text-sm font-medium transition-all text-indigo-200 hover:text-white">深度分析 (20+ 參數)</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-8">
+            <form id="prompt-form" class="space-y-8">
+                
+                <!-- SECTION 1: ESSENTIAL (Always Visible) -->
+                <div>
+                    <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3">1</span>
+                        核心參數 (必填)
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- 1. 旅遊對象 -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">旅遊對象 (Travel Companions)</label>
+                            <select name="旅遊對象" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2 border">
+                                <option value="">請選擇...</option>
+                                <option value="獨遊">獨遊 (Solo)</option>
+                                <option value="情侶/夫妻">情侶/夫妻 (Couple)</option>
+                                <option value="朋友">朋友 (Friends)</option>
+                                <option value="家庭 (帶小孩)">家庭 (帶小孩) (Family with kids)</option>
+                                <option value="家庭 (帶長輩)">家庭 (帶長輩) (Family with elderly)</option>
+                            </select>
+                        </div>
+                        <!-- 2. 交通方式 -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">主要交通方式 (Transportation)</label>
+                            <select name="交通方式" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2 border">
+                                <option value="">請選擇...</option>
+                                <option value="租車自駕">租車自駕 (Rental Car)</option>
+                                <option value="包車">包車 (Chartered Car)</option>
+                                <option value="公共交通 (巴士)">公共交通 (巴士) (Public Bus)</option>
+                                <option value="的士為主">的士為主 (Taxi)</option>
+                            </select>
+                        </div>
+                        <!-- 3. 旅遊節奏 -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">旅遊節奏 (Pace)</label>
+                            <div class="flex gap-4 mt-2">
+                                <label class="inline-flex items-center">
+                                    <input type="radio" name="旅遊節奏" value="緊湊充實" class="text-indigo-600 focus:ring-indigo-500">
+                                    <span class="ml-2 text-sm text-gray-700">緊湊充實 (多踩點)</span>
+                                </label>
+                                <label class="inline-flex items-center">
+                                    <input type="radio" name="旅遊節奏" value="輕鬆慢活" class="text-indigo-600 focus:ring-indigo-500">
+                                    <span class="ml-2 text-sm text-gray-700">輕鬆慢活 (深度遊)</span>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- 4. 必去景點/活動 -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">必去景點/活動 (Must-do)</label>
+                            <input type="text" name="必去景點" placeholder="例如：漢拏山、牛島、黑豬肉一條街" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2 border">
+                        </div>
+                        <!-- 5. 預算範圍 -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">預算範圍 (Budget)</label>
+                            <select name="預算範圍" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2 border">
+                                <option value="">請選擇...</option>
+                                <option value="窮遊/背包客">窮遊/背包客 (Budget)</option>
+                                <option value="中等/舒適">中等/舒適 (Moderate)</option>
+                                <option value="豪華/享受">豪華/享受 (Luxury)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 2: DEEP DIVE (Hidden by default) -->
+                <div id="advanced-section" class="hidden">
+                    <div class="relative py-4">
+                        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                            <div class="w-full border-t border-gray-300"></div>
+                        </div>
+                        <div class="relative flex justify-center">
+                            <span class="bg-white px-3 text-sm font-medium text-gray-500">進階詳細設定</span>
+                        </div>
+                    </div>
+
+                    <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="bg-purple-100 text-purple-700 w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3">2</span>
+                        深度微調參數 (選填)
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 bg-gray-50 rounded-xl border border-gray-200">
+                        <!-- 6. 住宿偏好 -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">住宿偏好 (Accommodation)</label>
+                            <select name="住宿偏好" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2 border">
+                                <option value="">請選擇...</option>
+                                <option value="星級酒店">星級酒店 (Hotel)</option>
+                                <option value="特色民宿">特色民宿 (Guesthouse/Airbnb)</option>
+                                <option value="海景渡假村">海景渡假村 (Resort)</option>
+                            </select>
+                        </div>
+                        <!-- 7. 飲食偏好/限制 -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">飲食偏好/限制 (Dietary)</label>
+                            <input type="text" name="飲食偏好" placeholder="例如：海鮮過敏、素食、無辣" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2 border">
+                        </div>
+                        <!-- 8. 特殊興趣 -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">特殊興趣 (Interests)</label>
+                            <div class="space-y-2 mt-2">
+                                <label class="inline-flex items-center mr-4"><input type="checkbox" name="特殊興趣_咖啡廳" value="特色咖啡廳打卡" class="text-indigo-600 rounded"><span class="ml-2 text-sm text-gray-700">特色咖啡廳</span></label>
+                                <label class="inline-flex items-center mr-4"><input type="checkbox" name="特殊興趣_自然風景" value="自然風景與行山" class="text-indigo-600 rounded"><span class="ml-2 text-sm text-gray-700">自然風景/行山</span></label>
+                                <label class="inline-flex items-center mr-4"><input type="checkbox" name="特殊興趣_博物館" value="博物館與文化" class="text-indigo-600 rounded"><span class="ml-2 text-sm text-gray-700">博物館/文化</span></label>
+                                <label class="inline-flex items-center mr-4"><input type="checkbox" name="特殊興趣_水上活動" value="海灘與水上活動" class="text-indigo-600 rounded"><span class="ml-2 text-sm text-gray-700">海灘/水上活動</span></label>
+                            </div>
+                        </div>
+                        <!-- 9. 航班時間 -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">航班時間 (Flight Times)</label>
+                            <input type="text" name="航班時間" placeholder="例如：早機去晚機返" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2 border">
+                        </div>
+                        <!-- 10. 行程格式 -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">行程輸出格式 (Format)</label>
+                            <select name="行程格式" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2 border">
+                                <option value="按日列表 (包含時間、景點、交通、餐飲)">按日列表 (包含時間、景點、交通、餐飲)</option>
+                                <option value="表格形式呈現">表格形式呈現</option>
+                                <option value="純景點推薦 (不排時間)">純景點推薦 (不排時間)</option>
+                            </select>
+                        </div>
+                        <!-- 11. 購物需求 -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">購物需求 (Shopping)</label>
+                            <select name="購物需求" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2 border">
+                                <option value="">請選擇...</option>
+                                <option value="大量購物 (免稅店、商圈)">大量購物 (免稅店、商圈)</option>
+                                <option value="買些手信即可 (傳統市場)">買些手信即可 (傳統市場)</option>
+                                <option value="不安排購物行程">不安排購物行程</option>
+                            </select>
+                        </div>
+                        <!-- 12. 備用方案 (雨天備案) -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">雨天備案 (Rainy Day Backup)</label>
+                            <div class="flex gap-4 mt-2">
+                                <label class="inline-flex items-center">
+                                    <input type="radio" name="雨天備案" value="需要提供室內備用景點" class="text-indigo-600 focus:ring-indigo-500">
+                                    <span class="ml-2 text-sm text-gray-700">需要提供</span>
+                                </label>
+                                <label class="inline-flex items-center">
+                                    <input type="radio" name="雨天備案" value="不需要" class="text-indigo-600 focus:ring-indigo-500">
+                                    <span class="ml-2 text-sm text-gray-700">不需要</span>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- 13. 語氣設定 -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">AI 回覆語氣 (Tone)</label>
+                            <select name="語氣設定" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2 border">
+                                <option value="專業且詳細的旅遊顧問">專業且詳細的旅遊顧問</option>
+                                <option value="熱情且充滿活力的導遊">熱情且充滿活力的導遊</option>
+                                <option value="簡潔明瞭，直接給重點">簡潔明瞭，直接給重點</option>
+                            </select>
+                        </div>
+                        <!-- 14. 攝影需求 -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">攝影需求 (Photography)</label>
+                            <select name="攝影需求" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2 border">
+                                <option value="">請選擇...</option>
+                                <option value="極度重視 (需安排最佳光線時間打卡)">極度重視 (需安排最佳光線時間打卡)</option>
+                                <option value="隨意拍拍即可">隨意拍拍即可</option>
+                            </select>
+                        </div>
+                        <!-- 15. 語言協助 -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">語言協助 (Language Help)</label>
+                            <div class="flex gap-4 mt-2">
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" name="語言協助" value="提供實用韓文點餐/問路短句" class="text-indigo-600 rounded">
+                                    <span class="ml-2 text-sm text-gray-700">附上實用韓文短句</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+            <!-- Action Buttons -->
+            <div class="mt-10 pt-6 border-t border-gray-100 flex flex-col sm:flex-row gap-4">
+                <button type="button" onclick="handleAction('share')" class="flex-1 flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-6 rounded-xl transition shadow-lg transform active:scale-98">
+                    手機分享
+                </button>
+                <button type="button" onclick="handleAction('copy')" class="flex-1 flex items-center justify-center bg-white hover:bg-gray-50 text-gray-700 font-bold py-4 px-6 rounded-xl border-2 border-gray-200 transition transform active:scale-98">
+                    結構化複製
+                </button>
+                <button type="button" onclick="handleAction('narrative')" class="flex-1 flex items-center justify-center bg-teal-600 hover:bg-teal-700 text-white font-bold py-4 px-6 rounded-xl transition shadow-lg transform active:scale-98">
+                    轉為敘述並複製
+                </button>
+            </div>
+
+            <!-- 終極保險：結果顯示框 -->
+            <div id="result-box" class="hidden mt-8 p-6 bg-gray-50 rounded-xl border border-gray-200 shadow-inner">
+                <h3 class="text-sm font-bold text-gray-700 mb-3 flex items-center">
+                    <span>✨ 生成結果</span>
+                    <span class="ml-2 text-xs font-normal text-gray-500">(如無法自動複製，請手動全選下方文字)</span>
+                </h3>
+                <textarea id="final-prompt-text" class="w-full h-64 p-4 text-sm font-mono text-gray-800 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" readonly></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mode Switching Logic
+        function setMode(mode) {
+            const advancedSection = document.getElementById('advanced-section');
+            const btnSimple = document.getElementById('btn-simple');
+            const btnDetailed = document.getElementById('btn-detailed');
+
+            if (mode === 'simple') {
+                advancedSection.classList.add('hidden');
+                btnSimple.className = "px-4 py-2 rounded-md text-sm font-medium transition-all bg-white text-indigo-900 shadow-sm";
+                btnDetailed.className = "px-4 py-2 rounded-md text-sm font-medium transition-all text-indigo-200 hover:text-white";
+            } else {
+                advancedSection.classList.remove('hidden');
+                btnSimple.className = "px-4 py-2 rounded-md text-sm font-medium transition-all text-indigo-200 hover:text-white";
+                btnDetailed.className = "px-4 py-2 rounded-md text-sm font-medium transition-all bg-white text-indigo-900 shadow-sm";
+            }
+        }
+
+        function generatePrompt() {
+            const form = document.getElementById('prompt-form');
+            const formData = new FormData(form);
+            let contextParts = [];
+            const baseRequest = "韓國濟州5日";
+            
+            for (let [key, value] of formData.entries()) {
+                if(value && value.trim() !== "") {
+                    let readableKey = key.replace(/_/g, ' ');
+                    contextParts.push(`### ${readableKey}\n${value}`);
+                }
+            }
+
+            return `
+# 🚀 Expert Prompt Request
+**Task**: ${baseRequest}
+
+---
+## 📋 Context & Requirements
+The following details define the scope and style of the response:
+
+${contextParts.join('\n\n')}
+
+---
+## 🎯 Output Instruction
+Please act as a world-class expert in this field. Analyze the requirements above and provide a comprehensive, high-quality response that strictly adheres to the constraints and tone specified.
+`.trim();
+        }
+
+        async function handleAction(type) {
+            let promptText = "";
+            const baseRequest = "韓國濟州5日";
+            const resultBox = document.getElementById('result-box');
+            const finalPromptText = document.getElementById('final-prompt-text');
+            
+            // 1. 準備要複製/分享嘅文字
+            if (type === 'narrative') {
+                const form = document.getElementById('prompt-form');
+                const formData = new FormData(form);
+                let details = [];
+                
+                for (let [key, value] of formData.entries()) {
+                    if(value && value.trim() !== "") {
+                        let readableKey = key.replace(/_/g, ' ');
+                        details.push(`關於「${readableKey}」請設定為「${value}」`);
+                    }
+                }
+                
+                promptText = baseRequest;
+                if(details.length > 0) {
+                    promptText += `並參考以下條件：\n${details.join('；\n')}。`;
+                }
+            } else {
+                promptText = generatePrompt();
+            }
+
+            // 2. 顯示結果框 (雙重保險)
+            finalPromptText.value = promptText;
+            resultBox.classList.remove('hidden');
+
+            // 3. 執行動作
+            if (type === 'share') {
+                if (navigator.share) {
+                    try { 
+                        await navigator.share({ 
+                            title: 'Super Prompt', 
+                            text: promptText 
+                        }); 
+                    } catch (err) { 
+                        console.log('分享已取消或失敗', err); 
+                    }
+                } else {
+                    alert('你的瀏覽器暫時不支援原生分享，請直接複製下方文字框內容。');
+                }
+            } else {
+                // 嘗試複製
+                try {
+                    // 新版 API
+                    if (navigator.clipboard && window.isSecureContext) {
+                        await navigator.clipboard.writeText(promptText);
+                        alert(type === 'narrative' ? '✅ 敘述型條件已成功複製！' : '✅ 結構化 Prompt 已成功複製！');
+                    } else {
+                        // 舊版 Fallback
+                        finalPromptText.select();
+                        document.execCommand('copy');
+                        alert(type === 'narrative' ? '✅ 敘述型條件已成功複製！' : '✅ 結構化 Prompt 已成功複製！');
+                    }
+                } catch (err) {
+                    alert('⚠️ 自動複製被瀏覽器阻擋，請手動長按下方文字框進行複製。');
+                    console.error('複製失敗:', err);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
