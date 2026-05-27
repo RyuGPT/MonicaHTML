@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>北海道 活動提案清單</title>
+    <style>
+        body { font-family: 'PingFang HK', sans-serif; background-color: #f4f7f6; color: #333; padding: 30px; max-width: 800px; margin: 0 auto; }
+        .container { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        h1 { text-align: center; color: #2c3e50; }
+        .category { margin-bottom: 30px; }
+        .category h3 { color: #3b82f6; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .check-all { transform: scale(1.2); cursor: pointer; }
+        .item-list { list-style: none; padding: 0; }
+        .item-list li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; font-size: 1.1rem; }
+        input[type="checkbox"] { transform: scale(1.2); cursor: pointer; }
+        .yt-link { text-decoration: none; background-color: #fee2e2; color: #dc2626; font-size: 0.85rem; padding: 4px 10px; border-radius: 20px; font-weight: bold; }
+        .btn-group { display: flex; gap: 15px; justify-content: center; margin-top: 40px; }
+        button { padding: 12px 24px; font-size: 1rem; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; transition: 0.2s; color: #fff; }
+        .btn-copy { background-color: #3b82f6; }
+        .btn-copy:hover { background-color: #2563eb; }
+        .btn-wa { background-color: #25D366; }
+        .btn-wa:hover { background-color: #1ebc5c; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>✈️ 北海道 活動提案</h1>
+    <p style="text-align: center; color: #64748b;">請勾選您感興趣的項目，完成後點擊下方按鈕。</p>
+
+    <!-- 類別：美食 -->
+    <div class="category">
+        <h3>🍽️ 美食 <label style="font-size: 0.9rem; color: #64748b; font-weight: normal;"><input type="checkbox" class="check-all" onchange="toggleAll(this, 'food-item')"> 全選</label></h3>
+        <ul class="item-list">
+            <li>
+                <input type="checkbox" class="food-item" value="螃蟹大餐 (螃蟹本家/冰雪之門)"> 螃蟹大餐 (螃蟹本家/冰雪之門)
+                <a href="https://www.youtube.com/results?search_query=北海道+螃蟹本家" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="food-item" value="成吉思汗烤肉 (達摩成吉思汗)"> 成吉思汗烤肉 (達摩成吉思汗)
+                <a href="https://www.youtube.com/results?search_query=北海道+成吉思汗烤肉" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="food-item" value="札幌湯咖哩 (奧芝商店/GARAKU)"> 札幌湯咖哩 (奧芝商店/GARAKU)
+                <a href="https://www.youtube.com/results?search_query=北海道+湯咖哩" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="food-item" value="在地海鮮丼 (二條市場/三角市場)"> 在地海鮮丼 (二條市場/三角市場)
+                <a href="https://www.youtube.com/results?search_query=北海道+二條市場+海鮮丼" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="food-item" value="人氣拉麵 (札幌拉麵共和國/信玄)"> 人氣拉麵 (札幌拉麵共和國/信玄)
+                <a href="https://www.youtube.com/results?search_query=北海道+信玄拉麵" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="food-item" value="北海道必吃甜點 (六花亭/北菓樓/LeTAO)"> 北海道必吃甜點 (六花亭/北菓樓/LeTAO)
+                <a href="https://www.youtube.com/results?search_query=北海道+六花亭+北菓樓" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="food-item" value="富良野哈密瓜甜點"> 富良野哈密瓜甜點
+                <a href="https://www.youtube.com/results?search_query=北海道+富良野哈密瓜" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 類別：景點 -->
+    <div class="category">
+        <h3>📸 景點 <label style="font-size: 0.9rem; color: #64748b; font-weight: normal;"><input type="checkbox" class="check-all" onchange="toggleAll(this, 'attraction-item')"> 全選</label></h3>
+        <ul class="item-list">
+            <li>
+                <input type="checkbox" class="attraction-item" value="旭山動物園 (企鵝、北極熊)"> 旭山動物園 (企鵝、北極熊)
+                <a href="https://www.youtube.com/results?search_query=北海道+旭山動物園" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="attraction-item" value="小樽運河與堺町通"> 小樽運河與堺町通
+                <a href="https://www.youtube.com/results?search_query=北海道+小樽運河" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="attraction-item" value="富田農場/四季彩之丘 (初夏花田)"> 富田農場/四季彩之丘 (初夏花田)
+                <a href="https://www.youtube.com/results?search_query=北海道+富田農場" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="attraction-item" value="大通公園與札幌電視塔"> 大通公園與札幌電視塔
+                <a href="https://www.youtube.com/results?search_query=北海道+大通公園" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="attraction-item" value="北海道神宮"> 北海道神宮
+                <a href="https://www.youtube.com/results?search_query=北海道+北海道神宮" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="attraction-item" value="白色戀人觀光工廠"> 白色戀人觀光工廠
+                <a href="https://www.youtube.com/results?search_query=北海道+白色戀人觀光工廠" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="attraction-item" value="札幌啤酒博物館"> 札幌啤酒博物館
+                <a href="https://www.youtube.com/results?search_query=北海道+札幌啤酒博物館" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 類別：活動/體驗 -->
+    <div class="category">
+        <h3>🎢 活動/體驗 <label style="font-size: 0.9rem; color: #64748b; font-weight: normal;"><input type="checkbox" class="check-all" onchange="toggleAll(this, 'activity-item')"> 全選</label></h3>
+        <ul class="item-list">
+            <li>
+                <input type="checkbox" class="activity-item" value="藻岩山夜景纜車"> 藻岩山夜景纜車
+                <a href="https://www.youtube.com/results?search_query=北海道+藻岩山夜景" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="activity-item" value="小樽音樂盒/玻璃手作體驗"> 小樽音樂盒/玻璃手作體驗
+                <a href="https://www.youtube.com/results?search_query=北海道+小樽音樂盒堂" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="activity-item" value="狸小路/驚安殿堂 夜間血拼"> 狸小路/驚安殿堂 夜間血拼
+                <a href="https://www.youtube.com/results?search_query=北海道+狸小路" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+            <li>
+                <input type="checkbox" class="activity-item" value="札幌市區和服/浴衣體驗"> 札幌市區和服/浴衣體驗
+                <a href="https://www.youtube.com/results?search_query=北海道+和服體驗" target="_blank" class="yt-link">▶️ YouTube 搜尋</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="btn-group">
+        <button class="btn-copy" onclick="copySelected()">📋 複製已選項目</button>
+        <button class="btn-wa" onclick="shareWhatsApp()">💬 WhatsApp 分享</button>
+    </div>
+</div>
+
+<script>
+    function toggleAll(source, className) {
+        let checkboxes = document.querySelectorAll('.' + className);
+        checkboxes.forEach(cb => cb.checked = source.checked);
+    }
+    function getSelectedText() {
+        let selected = [];
+        document.querySelectorAll('input[type="checkbox"]:not(.check-all):checked').forEach(cb => {
+            selected.push("- " + cb.value);
+        });
+        return selected.join('\n');
+    }
+    function copySelected() {
+        let text = getSelectedText();
+        if(!text) return alert('請先勾選至少一個項目！');
+        navigator.clipboard.writeText(text).then(() => {
+            alert('✅ 已成功複製！請將清單貼上回覆給 AI。');
+        }).catch(err => { alert('複製失敗，請手動選取複製。'); });
+    }
+    function shareWhatsApp() {
+        let text = getSelectedText();
+        if(!text) return alert('請先勾選至少一個項目！');
+        let message = '我的 北海道 旅行心水清單：\n\n' + text;
+        let url = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(message);
+        window.open(url, '_blank');
+    }
+</script>
+</body>
+</html>
